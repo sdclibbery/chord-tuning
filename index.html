@@ -1,0 +1,46 @@
+<html>
+<head>
+  <style>
+  body {
+    font-family: helvetica,arial;
+  }
+  </style>
+</head>
+<body>
+  <h1>Chord Tuning Tool</h1>
+  <p>Play a chord and allow tuning the intervals</p>
+</body>
+<script type="text/javascript">
+
+/*
+** MVP
+x Play a major triad with web Audio
+* Sliders to set tuning of third and fifth
+** Slice 2
+* Set directly to equal temperament and
+*/
+
+try { if (!AudioContext) { throw 1; } } catch(e) { document.getElementById('body').innerHTML = 'Web Audio not supported!'; }
+
+var audio = new AudioContext();
+
+var playNote = function (f) {
+  var vco = audio.createOscillator();
+  vco.frequency.value = f;
+  vco.type = 'triangle';
+  var vca = this.audio.createGain();
+  vca.gain.value = 0.24;
+  vco.connect(vca);
+  vca.connect(audio.destination);
+  vco.start(0);
+};
+
+var root = playNote(440);
+var third = playNote(440*5/4);
+var fifth = playNote(440*3/2);
+
+
+
+  </script>
+</body>
+</html>
