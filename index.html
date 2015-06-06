@@ -13,11 +13,15 @@
 <script type="text/javascript">
 
 /*
-** MVP
 x Play a major triad with web Audio
-* Sliders to set tuning of third and fifth
-** Slice 2
-* Set directly to equal temperament and
+* Buttons to change tuning of intervals: 12-tet or 5-limit
+* Slide to new tuning, dont jump
+* Display intervals in cents and ratios
+* More tunings
+* Custom tuning with sliders
+* Minor triad
+* Diminished triad
+* Dom7
 */
 
 try { if (!AudioContext) { throw 1; } } catch(e) { document.getElementById('body').innerHTML = 'Web Audio not supported!'; }
