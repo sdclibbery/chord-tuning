@@ -21,8 +21,9 @@
   </p>
   <P>
     <button onclick="chord('I')">I</button>
-    <button onclick="chord('IV')">V</button>
+    <button onclick="chord('IV')">IV</button>
     <button onclick="chord('V')">V</button>
+    <button onclick="chord('vi')">vi</button>
   </p>
   <p>Root: <span id="root"></span></p>
   <p>Third: <span id="third"></span></p>
@@ -66,7 +67,7 @@ var fifth;
 var freqs = {
   I: {
     '5-limit': [ generator, generator*5/4, generator*3/2 ],
-    '3-limit': [ generator, generator*81/64, generator*3/2 ],
+    '3-limit': [ generator, generator*3/2*3/2*3/2, generator*3/2 ],
     '12-tet': [ generator, generator*Math.pow(2, 4/12), generator*Math.pow(2, 7/12) ]
   },
   IV: {
@@ -78,6 +79,11 @@ var freqs = {
     '5-limit': [ generator*3/2, generator*3/2*5/4, generator*3/2*3/2 ],
     '3-limit': [ generator*3/2, generator*3/2*81/64, generator*3/2*3/2 ],
     '12-tet': [ generator*Math.pow(2, 7/12), generator*Math.pow(2, 11/12), generator*Math.pow(2, 14/12) ]
+  },
+  vi: {
+    '5-limit': [ generator*2/3*5/4, generator, generator*5/4 ],
+    '3-limit': [ generator*3/2*3/2*3/2/2/2, generator, generator*3/2*3/2*3/2*3/2/2/2 ],
+    '12-tet': [ generator*Math.pow(2, -3/12), generator*Math.pow(2, 0/12), generator*Math.pow(2, 4/12) ]
   }
 };
 
