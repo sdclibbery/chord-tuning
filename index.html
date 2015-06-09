@@ -32,11 +32,9 @@ x Slide to new tuning, dont jump
 x choice of waveforms
 ! Bug: transition not smooth first time
 * Display live intervals in cents and ratios
+* Choice of chords
 * More tunings
 * Custom tuning with sliders
-* Minor triad
-* Diminished triad
-* Dom7
 */
 
 try { if (!AudioContext) { throw 1; } } catch(e) { document.getElementById('body').innerHTML = 'Web Audio not supported!'; }
@@ -61,17 +59,12 @@ var root = playNote(generator);
 var third = playNote(generator*5/4);
 var fifth = playNote(generator*3/2);
 
-setInterval(function () {
-  document.getElementById('root').innerHTML = root.frequency.value + 'Hz';
-  document.getElementById('third').innerHTML = third.frequency.value + 'Hz';
-  document.getElementById('fifth').innerHTML = fifth.frequency.value + 'Hz';
-}, 100);
-
 switchTo5Limit = function () {
   var t = audio.currentTime + 1;
   third.frequency.linearRampToValueAtTime(generator*5/4, t);
   fifth.frequency.linearRampToValueAtTime(generator*3/2, t);
 };
+switchTo5Limit();
 
 switchTo3Limit = function () {
   var t = audio.currentTime + 1;
@@ -85,11 +78,18 @@ switchTo12Tet = function () {
   fifth.frequency.linearRampToValueAtTime(generator*Math.pow(2, 7/12), t);
 };
 
+
 setWave = function (type) {
   root.type = type;
   third.type = type;
   fifth.type = type;
 };
+
+setInterval(function () {
+  document.getElementById('root').innerHTML = root.frequency.value + 'Hz';
+  document.getElementById('third').innerHTML = third.frequency.value + 'Hz';
+  document.getElementById('fifth').innerHTML = fifth.frequency.value + 'Hz';
+}, 100);
 
   </script>
 </body>
