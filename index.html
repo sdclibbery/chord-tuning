@@ -19,6 +19,7 @@
     <button onclick="switchTo3Limit()">3-Limit</button>
     <button onclick="switchTo12Tet()">12-TET</button>
   </p>
+  <p>Root: <span id="root"></span></p>
   <p>Third: <span id="third"></span></p>
   <p>Fifth: <span id="fifth"></span></p>
 </body>
@@ -29,6 +30,7 @@ x Play a major triad with web Audio
 x Buttons to change tuning of intervals: 12-tet or 5-limit
 x Slide to new tuning, dont jump
 x choice of waveforms
+! Bug: transition not smooth first time
 * Display live intervals in cents and ratios
 * More tunings
 * Custom tuning with sliders
@@ -60,8 +62,9 @@ var third = playNote(generator*5/4);
 var fifth = playNote(generator*3/2);
 
 setInterval(function () {
-  document.getElementById('third').innerHTML = third.frequency.value;
-  document.getElementById('fifth').innerHTML = fifth.frequency.value;
+  document.getElementById('root').innerHTML = root.frequency.value + 'Hz';
+  document.getElementById('third').innerHTML = third.frequency.value + 'Hz';
+  document.getElementById('fifth').innerHTML = fifth.frequency.value + 'Hz';
 }, 100);
 
 switchTo5Limit = function () {
