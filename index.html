@@ -15,9 +15,14 @@
     <button onclick="setWave('square')">Square</button>
   </p>
   <P>
-    <button onclick="switchTo5Limit()">5-Limit</button>
-    <button onclick="switchTo3Limit()">3-Limit</button>
-    <button onclick="switchTo12Tet()">12-TET</button>
+    <button onclick="tuning('5-limit')">5-Limit</button>
+    <button onclick="tuning('3-limit')">3-Limit</button>
+    <button onclick="tuning('12-tet')">12-TET</button>
+  </p>
+  <P>
+    <button onclick="chord('I')">I</button>
+    <button onclick="chord('IV')">V</button>
+    <button onclick="chord('V')">V</button>
   </p>
   <p>Root: <span id="root"></span></p>
   <p>Third: <span id="third"></span></p>
@@ -30,11 +35,10 @@ x Play a major triad with web Audio
 x Buttons to change tuning of intervals: 12-tet or 5-limit
 x Slide to new tuning, dont jump
 x choice of waveforms
-! Bug: transition not smooth first time
-* Display live intervals in cents and ratios
 * Choice of chords
 * More tunings
 * Custom tuning with sliders
+* Display live intervals in cents and ratios
 */
 
 try { if (!AudioContext) { throw 1; } } catch(e) { document.getElementById('body').innerHTML = 'Web Audio not supported!'; }
@@ -55,28 +59,53 @@ var playNote = function (f) {
 
 var generator = 440;
 
-var root = playNote(generator);
-var third = playNote(generator*5/4);
-var fifth = playNote(generator*3/2);
+var root;
+var third;
+var fifth;
 
-switchTo5Limit = function () {
-  var t = audio.currentTime + 1;
-  third.frequency.linearRampToValueAtTime(generator*5/4, t);
-  fifth.frequency.linearRampToValueAtTime(generator*3/2, t);
+var freqs = {
+  I: {
+    '5-limit': [ generator, generator*5/4, generator*3/2 ],
+    '3-limit': [ generator, generator*81/64, generator*3/2 ],
+    '12-tet': [ generator, generator*Math.pow(2, 4/12), generator*Math.pow(2, 7/12) ]
+  },
+  IV: {
+    '5-limit': [ generator*4/3, generator*4/3*5/4, generator*4/3*3/2 ],
+    '3-limit': [ generator*4/3, generator*4/3*81/64, generator*4/3*3/2 ],
+    '12-tet': [ generator*Math.pow(2, 5/12), generator*Math.pow(2, 9/12), generator*Math.pow(2, 12/12) ]
+  },
+  V: {
+    '5-limit': [ generator*3/2, generator*3/2*5/4, generator*3/2*3/2 ],
+    '3-limit': [ generator*3/2, generator*3/2*81/64, generator*3/2*3/2 ],
+    '12-tet': [ generator*Math.pow(2, 7/12), generator*Math.pow(2, 11/12), generator*Math.pow(2, 14/12) ]
+  }
 };
-switchTo5Limit();
 
-switchTo3Limit = function () {
-  var t = audio.currentTime + 1;
-  third.frequency.linearRampToValueAtTime(generator*81/64, t);
-  fifth.frequency.linearRampToValueAtTime(generator*3/2, t);
+var curTuning = '5-limit';
+var curChord = 'I';
+
+chord = function (chord) {
+  curChord = chord;
+  var notes = freqs[curChord][curTuning];
+  if (root) { root.stop(); }
+  if (third) { third.stop(); }
+  if (fifth) { fifth.stop(); }
+  root = playNote(notes[0]);
+  third = playNote(notes[1]);
+  fifth = playNote(notes[2]);
+  tuning(curTuning);
 };
 
-switchTo12Tet = function () {
+tuning = function (tuning) {
+  curTuning = tuning;
   var t = audio.currentTime + 1;
-  third.frequency.linearRampToValueAtTime(generator*Math.pow(2, 4/12), t);
-  fifth.frequency.linearRampToValueAtTime(generator*Math.pow(2, 7/12), t);
+  var notes = freqs[curChord][curTuning];
+  root.frequency.linearRampToValueAtTime(notes[0], t);
+  third.frequency.linearRampToValueAtTime(notes[1], t);
+  fifth.frequency.linearRampToValueAtTime(notes[2], t);
 };
+
+chord(curChord);
 
 
 setWave = function (type) {
