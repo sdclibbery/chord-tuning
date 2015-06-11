@@ -21,6 +21,7 @@
   </p>
   <P>
     <button onclick="chord('I')">I</button>
+    <button onclick="chord('ii')">ii</button>
     <button onclick="chord('IV')">IV</button>
     <button onclick="chord('V')">V</button>
     <button onclick="chord('vi')">vi</button>
@@ -68,25 +69,34 @@ var root;
 var third;
 var fifth;
 
+var P5 = 3/2;
+var M3 = 5/4;
+var Oc = 2;
+
 var freqs = {
   I: {
-    '5-limit': [ generator, generator*5/4, generator*3/2 ],
-    '3-limit': [ generator, generator*3/2*3/2*3/2/2, generator*3/2 ],
+    '5-limit': [ generator, generator*M3, generator*P5 ],
+    '3-limit': [ generator, generator*P5*P5*P5*P5/Oc/Oc, generator*P5 ],
     '12-tet': [ generator, generator*Math.pow(2, 4/12), generator*Math.pow(2, 7/12) ]
   },
+  ii: {
+    '5-limit': [ generator*P5*P5/Oc/*!*/, generator/P5*Oc, generator/P5*Oc*M3 ],
+    '3-limit': [ generator*P5*P5/Oc/*!*/, generator/P5*Oc, generator*P5*P5*P5/Oc ],
+    '12-tet': [ generator*Math.pow(2, 2/12), generator*Math.pow(2, 5/12), generator*Math.pow(2, 9/12) ]
+  },
   IV: {
-    '5-limit': [ generator*4/3, generator*4/3*5/4, generator*4/3*3/2 ],
-    '3-limit': [ generator*4/3, generator*4/3*81/64, generator*4/3*3/2 ],
+    '5-limit': [ generator/P5*Oc, generator/P5*Oc*M3, generator*Oc ],
+    '3-limit': [ generator/P5*Oc, generator*P5*P5*P5/Oc, generator*Oc ],
     '12-tet': [ generator*Math.pow(2, -7/12), generator*Math.pow(2, -3/12), generator*Math.pow(2, 0/12) ]
   },
   V: {
-    '5-limit': [ generator*3/2, generator*3/2*5/4, generator*3/2*3/2 ],
-    '3-limit': [ generator*3/2, generator*3/2*81/64, generator*3/2*3/2 ],
+    '5-limit': [ generator*P5, generator*P5*M3, generator*P5*P5 ],
+    '3-limit': [ generator*P5, generator*P5*P5*P5*P5*P5/Oc/Oc, generator*P5*P5 ],
     '12-tet': [ generator*Math.pow(2, 7/12), generator*Math.pow(2, 11/12), generator*Math.pow(2, 14/12) ]
   },
   vi: {
-    '5-limit': [ generator*4/3*5/4, generator*2, generator*5/2 ],
-    '3-limit': [ generator*3/2*3/2*3/2/2, generator*2, generator*3/2*3/2*3/2*3/2/2 ],
+    '5-limit': [ generator/P5*Oc*M3, generator*2, generator*M3*Oc ],
+    '3-limit': [ generator*P5*P5*P5/Oc, generator*2, generator*P5*P5*P5*P5/Oc ],
     '12-tet': [ generator*Math.pow(2, 9/12), generator*Math.pow(2, 12/12), generator*Math.pow(2, 16/12) ]
   }
 };
