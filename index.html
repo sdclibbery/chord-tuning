@@ -22,6 +22,7 @@
   <P>
     <button onclick="chord('I')">I</button>
     <button onclick="chord('ii')">ii</button>
+    <button onclick="chord('iii')">iii</button>
     <button onclick="chord('IV')">IV</button>
     <button onclick="chord('V')">V</button>
     <button onclick="chord('vi')">vi</button>
@@ -84,6 +85,11 @@ var freqs = {
     '5-limit': [ generator*P5*P5/Oc/*!*/, generator/P5*Oc, generator/P5*Oc*M3 ],
     '3-limit': [ generator*P5*P5/Oc/*!*/, generator/P5*Oc, generator*P5*P5*P5/Oc ],
     '12-tet': [ generator*Math.pow(2, 2/12), generator*Math.pow(2, 5/12), generator*Math.pow(2, 9/12) ]
+  },
+  iii: {
+    '5-limit': [ generator*M3, generator*P5, generator*P5*M3 ],
+    '3-limit': [ generator*P5*P5*P5*P5/Oc/Oc, generator*P5, generator*P5*P5*P5*P5*P5/Oc/Oc ],
+    '12-tet': [ generator*Math.pow(2, 4/12), generator*Math.pow(2, 8/12), generator*Math.pow(2, 11/12) ]
   },
   IV: {
     '5-limit': [ generator/P5*Oc, generator/P5*Oc*M3, generator*Oc ],
