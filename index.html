@@ -25,6 +25,7 @@
     <button onclick="chord('IV')">IV</button>
     <button onclick="chord('V')">V</button>
     <button onclick="chord('vi')">vi</button>
+    <button onclick="chord('viio')">viio</button>
   </p>
   <p>Root: <span id="root"></span></p>
   <p>Third: <span id="third"></span></p>
@@ -87,7 +88,7 @@ var freqs = {
   IV: {
     '5-limit': [ generator/P5*Oc, generator/P5*Oc*M3, generator*Oc ],
     '3-limit': [ generator/P5*Oc, generator*P5*P5*P5/Oc, generator*Oc ],
-    '12-tet': [ generator*Math.pow(2, -7/12), generator*Math.pow(2, -3/12), generator*Math.pow(2, 0/12) ]
+    '12-tet': [ generator*Math.pow(2, 5/12), generator*Math.pow(2, 9/12), generator*Math.pow(2, 12/12) ]
   },
   V: {
     '5-limit': [ generator*P5, generator*P5*M3, generator*P5*P5 ],
@@ -95,9 +96,14 @@ var freqs = {
     '12-tet': [ generator*Math.pow(2, 7/12), generator*Math.pow(2, 11/12), generator*Math.pow(2, 14/12) ]
   },
   vi: {
-    '5-limit': [ generator/P5*Oc*M3, generator*2, generator*M3*Oc ],
-    '3-limit': [ generator*P5*P5*P5/Oc, generator*2, generator*P5*P5*P5*P5/Oc ],
+    '5-limit': [ generator/P5*Oc*M3, generator*Oc, generator*M3*Oc ],
+    '3-limit': [ generator*P5*P5*P5/Oc, generator*Oc, generator*P5*P5*P5*P5/Oc ],
     '12-tet': [ generator*Math.pow(2, 9/12), generator*Math.pow(2, 12/12), generator*Math.pow(2, 16/12) ]
+  },
+  viio: {
+    '5-limit': [ generator*P5*M3, generator*P5*P5, generator/P5*Oc*Oc ],
+    '3-limit': [ generator*P5*P5*P5*P5*P5/Oc/Oc, generator*P5*P5, generator/P5*Oc*Oc ],
+    '12-tet': [ generator*Math.pow(2, 11/12), generator*Math.pow(2, 14/12), generator*Math.pow(2, 17/12) ]
   }
 };
 
