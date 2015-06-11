@@ -147,12 +147,28 @@ var cents = function (r) {
   return Math.round(1200 * Math.log2(r));
 };
 
+var ratio = function (r) {
+  var num = 1;
+  var denom = 1;
+  for (denom = 1; denom < 40; denom++) {
+    for (num = 1; num < 40; num++) {
+      if (Math.abs(num/denom - r) < 0.001) {
+        return num+'/'+denom;
+      } else if (num/denom > r) {
+        continue;
+      }
+    }
+  }
+  return '';
+};
+
 setInterval(function () {
   var i3 = third.frequency.value / root.frequency.value;
   var i5 = fifth.frequency.value / root.frequency.value;
-  document.getElementById('third').innerHTML = cents(i3) + ' cents';
-  document.getElementById('fifth').innerHTML = cents(i5) + ' cents';
+  document.getElementById('third').innerHTML = cents(i3) + ' cents,  ' + ratio(i3);
+  document.getElementById('fifth').innerHTML = cents(i5) + ' cents,  ' + ratio(i5);
 }, 100);
+
 
   </script>
 </body>
