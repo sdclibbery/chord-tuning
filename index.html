@@ -46,10 +46,16 @@ try { if (!AudioContext) { throw 1; } } catch(e) { document.getElementById('body
 
 var audio = new AudioContext();
 
+var curTuning = '5-limit';
+var curChord = 'I';
+var curWave = 'sine';
+
+var generator = 440;
+
 var playNote = function (f) {
   var vco = audio.createOscillator();
   vco.frequency.value = f;
-  vco.type = 'sine';
+  vco.type = curWave;
   var vca = this.audio.createGain();
   vca.gain.value = 0.24;
   vco.connect(vca);
@@ -58,8 +64,6 @@ var playNote = function (f) {
   return vco;
 };
 
-var generator = 440;
-
 var root;
 var third;
 var fifth;
@@ -67,13 +71,13 @@ var fifth;
 var freqs = {
   I: {
     '5-limit': [ generator, generator*5/4, generator*3/2 ],
-    '3-limit': [ generator, generator*3/2*3/2*3/2, generator*3/2 ],
+    '3-limit': [ generator, generator*3/2*3/2*3/2/2, generator*3/2 ],
     '12-tet': [ generator, generator*Math.pow(2, 4/12), generator*Math.pow(2, 7/12) ]
   },
   IV: {
     '5-limit': [ generator*4/3, generator*4/3*5/4, generator*4/3*3/2 ],
     '3-limit': [ generator*4/3, generator*4/3*81/64, generator*4/3*3/2 ],
-    '12-tet': [ generator*Math.pow(2, 5/12), generator*Math.pow(2, 9/12), generator*Math.pow(2, 12/12) ]
+    '12-tet': [ generator*Math.pow(2, -7/12), generator*Math.pow(2, -3/12), generator*Math.pow(2, 0/12) ]
   },
   V: {
     '5-limit': [ generator*3/2, generator*3/2*5/4, generator*3/2*3/2 ],
@@ -81,14 +85,11 @@ var freqs = {
     '12-tet': [ generator*Math.pow(2, 7/12), generator*Math.pow(2, 11/12), generator*Math.pow(2, 14/12) ]
   },
   vi: {
-    '5-limit': [ generator*2/3*5/4, generator, generator*5/4 ],
-    '3-limit': [ generator*3/2*3/2*3/2/2/2, generator, generator*3/2*3/2*3/2*3/2/2/2 ],
-    '12-tet': [ generator*Math.pow(2, -3/12), generator*Math.pow(2, 0/12), generator*Math.pow(2, 4/12) ]
+    '5-limit': [ generator*4/3*5/4, generator*2, generator*5/2 ],
+    '3-limit': [ generator*3/2*3/2*3/2/2, generator*2, generator*3/2*3/2*3/2*3/2/2 ],
+    '12-tet': [ generator*Math.pow(2, 9/12), generator*Math.pow(2, 12/12), generator*Math.pow(2, 16/12) ]
   }
 };
-
-var curTuning = '5-limit';
-var curChord = 'I';
 
 chord = function (chord) {
   curChord = chord;
@@ -115,9 +116,10 @@ chord(curChord);
 
 
 setWave = function (type) {
-  root.type = type;
-  third.type = type;
-  fifth.type = type;
+  curWave = type;
+  root.type = curWave;
+  third.type = curWave;
+  fifth.type = curWave;
 };
 
 setInterval(function () {
