@@ -8,16 +8,16 @@
 </head>
 <body>
   <h1>Chord Tuning Tool</h1>
-  <p>Play a chord and tune the intervals</p>
   <P>
     <button onclick="setWave('sine')">Sine</button>
     <button onclick="setWave('sawtooth')">Sawtooth</button>
     <button onclick="setWave('square')">Square</button>
   </p>
   <P>
-    <button onclick="tuning('5-limit')">5-Limit</button>
-    <button onclick="tuning('3-limit')">3-Limit</button>
-    <button onclick="tuning('12-tet')">12-TET</button>
+    <button onclick="tuning('5-limit')">5-Limit Just</button>
+    <button onclick="tuning('12-tet')">12-TET Equal Temperament</button>
+    <button onclick="tuning('3-limit')">3-Limit Pythagorean</button>
+    <button onclick="tuning('5-limit-func')">5-Limit functional</button>
   </p>
   <P>
     <button onclick="chord('I')">I</button>
@@ -39,8 +39,9 @@ x Buttons to change tuning of intervals: 12-tet or 5-limit
 x Slide to new tuning, dont jump
 x choice of waveforms
 x Choice of chords
-* Display live intervals in cents and ratios
+x Display live intervals in cents and ratios
 * More tunings
+* Chromatic chords on another line: i, II, iv, v, bVI, bVII
 * Custom tuning with sliders
 */
 
@@ -77,38 +78,45 @@ var Oc = 2;
 var freqs = {
   I: {
     '5-limit': [ generator, generator*M3, generator*P5 ],
+    '12-tet': [ generator, generator*Math.pow(2, 4/12), generator*Math.pow(2, 7/12) ],
     '3-limit': [ generator, generator*P5*P5*P5*P5/Oc/Oc, generator*P5 ],
-    '12-tet': [ generator, generator*Math.pow(2, 4/12), generator*Math.pow(2, 7/12) ]
+    '5-limit-func': [ generator, generator*M3, generator*P5 ]
   },
   ii: {
     '5-limit': [ generator*P5*P5/Oc/*!*/, generator/P5*Oc, generator/P5*Oc*M3 ],
+    '12-tet': [ generator*Math.pow(2, 2/12), generator*Math.pow(2, 5/12), generator*Math.pow(2, 9/12) ],
     '3-limit': [ generator*P5*P5/Oc/*!*/, generator/P5*Oc, generator*P5*P5*P5/Oc ],
-    '12-tet': [ generator*Math.pow(2, 2/12), generator*Math.pow(2, 5/12), generator*Math.pow(2, 9/12) ]
+    '5-limit-func': [ generator/P5/P5*M3*Oc, generator/P5*Oc, generator/P5*Oc*M3 ]
   },
   iii: {
     '5-limit': [ generator*M3, generator*P5, generator*P5*M3 ],
+    '12-tet': [ generator*Math.pow(2, 4/12), generator*Math.pow(2, 7/12), generator*Math.pow(2, 11/12) ],
     '3-limit': [ generator*P5*P5*P5*P5/Oc/Oc, generator*P5, generator*P5*P5*P5*P5*P5/Oc/Oc ],
-    '12-tet': [ generator*Math.pow(2, 4/12), generator*Math.pow(2, 7/12), generator*Math.pow(2, 11/12) ]
+    '5-limit-func': [ generator*M3, generator*P5, generator*P5*M3 ]
   },
   IV: {
     '5-limit': [ generator/P5*Oc, generator/P5*Oc*M3, generator*Oc ],
+    '12-tet': [ generator*Math.pow(2, 5/12), generator*Math.pow(2, 9/12), generator*Math.pow(2, 12/12) ],
     '3-limit': [ generator/P5*Oc, generator*P5*P5*P5/Oc, generator*Oc ],
-    '12-tet': [ generator*Math.pow(2, 5/12), generator*Math.pow(2, 9/12), generator*Math.pow(2, 12/12) ]
+    '5-limit-func': [ generator/P5*Oc, generator/P5*Oc*M3, generator*Oc ]
   },
   V: {
     '5-limit': [ generator*P5, generator*P5*M3, generator*P5*P5 ],
+    '12-tet': [ generator*Math.pow(2, 7/12), generator*Math.pow(2, 11/12), generator*Math.pow(2, 14/12) ],
     '3-limit': [ generator*P5, generator*P5*P5*P5*P5*P5/Oc/Oc, generator*P5*P5 ],
-    '12-tet': [ generator*Math.pow(2, 7/12), generator*Math.pow(2, 11/12), generator*Math.pow(2, 14/12) ]
+    '5-limit-func': [ generator*P5, generator*P5*M3, generator*P5*P5 ]
   },
   vi: {
     '5-limit': [ generator/P5*Oc*M3, generator*Oc, generator*M3*Oc ],
+    '12-tet': [ generator*Math.pow(2, 9/12), generator*Math.pow(2, 12/12), generator*Math.pow(2, 16/12) ],
     '3-limit': [ generator*P5*P5*P5/Oc, generator*Oc, generator*P5*P5*P5*P5/Oc ],
-    '12-tet': [ generator*Math.pow(2, 9/12), generator*Math.pow(2, 12/12), generator*Math.pow(2, 16/12) ]
+    '5-limit-func': [ generator/P5*Oc*M3, generator*Oc, generator*M3*Oc ]
   },
   viio: {
     '5-limit': [ generator*P5*M3, generator*P5*P5, generator/P5*Oc*Oc ],
+    '12-tet': [ generator*Math.pow(2, 11/12), generator*Math.pow(2, 14/12), generator*Math.pow(2, 17/12) ],
     '3-limit': [ generator*P5*P5*P5*P5*P5/Oc/Oc, generator*P5*P5, generator/P5*Oc*Oc ],
-    '12-tet': [ generator*Math.pow(2, 11/12), generator*Math.pow(2, 14/12), generator*Math.pow(2, 17/12) ]
+    '5-limit-func': [ generator*P5*M3, generator*P5*P5, generator*P5*P5*P5/M3 ]
   }
 };
 
