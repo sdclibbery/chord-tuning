@@ -132,40 +132,40 @@ var freqs = {
   },
 
   i: {
-    '5-limit': [ generator, generator/M3*P5, generator*P5 ],
-    '12-tet': [ generator, tonic*Math.pow(2, 3/12), tonic*Math.pow(2, 7/12) ],
-    '3-limit': [ generator, generator/P5/P5/P5*Oc*Oc, generator*P5 ],
-    '5-limit-func': [ generator, generator/M3*P5, generator*P5 ]
+    '5-limit': [ tonic, dominant/M3, dominant ],
+    '12-tet': [ tonic, tonic*Math.pow(2, 3/12), tonic*Math.pow(2, 7/12) ],
+    '3-limit': [ tonic, subdominant/*!*//P5/P5*Oc*Oc, dominant ],
+    '5-limit-func': [ tonic, dominant/M3, dominant ]
   },
   'V/V': {
-    '5-limit': [ generator*P5*P5/Oc/*!*/, generator*P5*P5*M3/Oc, generator/P5*Oc*M3 ],
+    '5-limit': [ dominant*P5/Oc, dominant*P5*M3/Oc, subdominant/*!*/*Oc*M3 ],
     '12-tet': [ tonic*Math.pow(2, 2/12), tonic*Math.pow(2, 6/12), tonic*Math.pow(2, 9/12) ],
-    '3-limit': [ generator*P5*P5/Oc/*!*/, generator*P5*P5*P5*P5*P5*P5/Oc/Oc/Oc, generator*P5*P5*P5/Oc ],
-    '5-limit-func': [ generator*P5*P5/Oc, generator*P5*P5*M3/Oc, generator*P5*P5*P5/Oc ]
+    '3-limit': [ dominant*P5/Oc, dominant*P5*P5*P5*P5*P5/Oc/Oc/Oc, dominant*P5*P5/Oc ],
+    '5-limit-func': [ dominant*P5/Oc, dominant*P5*M3/Oc, dominant*P5*P5/Oc ]
   },
   iv: {
-    '5-limit': [ generator/P5*Oc, generator/M3*Oc, generator*Oc ],
+    '5-limit': [ subdominant*Oc, tonic/M3*Oc, tonic*Oc ],
     '12-tet': [ tonic*Math.pow(2, 5/12), tonic*Math.pow(2, 8/12), tonic*Math.pow(2, 12/12) ],
-    '3-limit': [ generator/P5*Oc, generator/P5/P5/P5/P5*Oc*Oc*Oc, generator*Oc ],
-    '5-limit-func': [ generator/P5*Oc, generator/M3*Oc, generator*Oc ]
+    '3-limit': [ subdominant*Oc, subdominant/P5/P5/P5*Oc*Oc*Oc, tonic*Oc ],
+    '5-limit-func': [ subdominant*Oc, tonic/M3*Oc, tonic*Oc ]
   },
   v: {
-    '5-limit': [ generator*P5, generator/P5/P5*Oc*Oc, generator*P5*P5 ],
+    '5-limit': [ dominant, subdominant/*!*//P5*Oc*Oc, dominant*P5 ],
     '12-tet': [ tonic*Math.pow(2, 7/12), tonic*Math.pow(2, 10/12), tonic*Math.pow(2, 14/12) ],
-    '3-limit': [ generator*P5, generator/P5/P5*Oc*Oc, generator*P5*P5 ],
-    '5-limit-func': [ generator*P5, generator*P5*P5/M3, generator*P5*P5 ]
+    '3-limit': [ dominant, subdominant/*!*//P5*Oc*Oc, dominant*P5 ],
+    '5-limit-func': [ dominant, dominant*P5/M3, dominant*P5 ]
   },
   bVI: {
-    '5-limit': [ generator/M3*Oc, generator*Oc, generator*P5/M3*Oc ],
+    '5-limit': [ tonic/M3*Oc, tonic*Oc, dominant/M3*Oc ],
     '12-tet': [ tonic*Math.pow(2, 8/12), tonic*Math.pow(2, 12/12), tonic*Math.pow(2, 15/12) ],
-    '3-limit': [ generator/P5/P5/P5/P5*Oc*Oc*Oc, generator*Oc, generator/P5/P5/P5*Oc*Oc*Oc ],
-    '5-limit-func': [ generator/M3*Oc, generator*Oc, generator*P5/M3*Oc ]
+    '3-limit': [ subdominant/*!*//P5/P5/P5*Oc*Oc*Oc, tonic*Oc, subdominant/*!*//P5/P5*Oc*Oc*Oc ],
+    '5-limit-func': [ tonic/M3*Oc, tonic*Oc, dominant/M3*Oc ]
   },
   bVII: {
-    '5-limit': [ generator/P5/P5*Oc*Oc, generator*P5*P5, generator/P5*Oc*Oc ],
+    '5-limit': [ subdominant/P5*Oc*Oc, dominant/*!*/*P5, subdominant*Oc*Oc ],
     '12-tet': [ tonic*Math.pow(2, 10/12), tonic*Math.pow(2, 14/12), tonic*Math.pow(2, 17/12) ],
-    '3-limit': [ generator/P5/P5*Oc*Oc, generator*P5*P5, generator/P5*Oc*Oc ],
-    '5-limit-func': [ generator/P5/P5*Oc*Oc, generator*P5*P5, generator/P5*Oc*Oc ]
+    '3-limit': [ subdominant/P5*Oc*Oc, dominant/*!*/*P5, subdominant*Oc*Oc ],
+    '5-limit-func': [ subdominant/P5*Oc*Oc, subdominant/P5*M3*Oc*Oc, subdominant*Oc*Oc ]
   }
 };
 
