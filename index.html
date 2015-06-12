@@ -88,7 +88,7 @@ var freqs = {
   iii: {
     '5-limit': [ generator*M3, generator*P5, generator*P5*M3 ],
     '3-limit': [ generator*P5*P5*P5*P5/Oc/Oc, generator*P5, generator*P5*P5*P5*P5*P5/Oc/Oc ],
-    '12-tet': [ generator*Math.pow(2, 4/12), generator*Math.pow(2, 8/12), generator*Math.pow(2, 11/12) ]
+    '12-tet': [ generator*Math.pow(2, 4/12), generator*Math.pow(2, 7/12), generator*Math.pow(2, 11/12) ]
   },
   IV: {
     '5-limit': [ generator/P5*Oc, generator/P5*Oc*M3, generator*Oc ],
@@ -148,15 +148,15 @@ var cents = function (r) {
 };
 
 var ratio = function (r) {
-  var num = 1;
   var denom = 1;
-  for (denom = 1; denom < 40; denom++) {
-    for (num = 1; num < 40; num++) {
-      if (Math.abs(num/denom - r) < 0.001) {
-        return num+'/'+denom;
-      } else if (num/denom > r) {
-        continue;
-      }
+  for (denom = 1; denom < 100; denom++) {
+    var num = Math.floor(r*denom);
+    if (Math.abs(num/denom - r) < 0.00001) {
+      return num+'/'+denom;
+    }
+    num = Math.ceil(r*denom);
+    if (Math.abs(num/denom - r) < 0.00001) {
+      return num+'/'+denom;
     }
   }
   return '';
